@@ -3,10 +3,10 @@ package server
 import (
 	"net/http"
 
-	"brandhang-portfolio/cmd/web"
-	"brandhang-portfolio/cmd/web/components/portfolio"
-	"brandhang-portfolio/cmd/web/pages"
-	"brandhang-portfolio/internal/handler"
+	"github.com/Brandhang34/brandhang-portfolio/cmd/web"
+	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/portfolio"
+	"github.com/Brandhang34/brandhang-portfolio/cmd/web/pages"
+	"github.com/Brandhang34/brandhang-portfolio/internal/handler"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"brandhang-portfolio/internal/server"
+	"github.com/Brandhang34/brandhang-portfolio/internal/server"
 )
 
 func gracefulShutdown(apiServer *http.Server, done chan bool) {

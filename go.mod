@@ -1,4 +1,4 @@
-module brandhang-portfolio
+module github.com/Brandhang34/brandhang-portfolio
 
 go 1.23.1
 
