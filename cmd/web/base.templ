@@ -1,0 +1,23 @@
+package web
+
+import components "brandhang-portfolio/cmd/web/components/shared"
+
+templ Base() {
+	<!DOCTYPE html>
+	<html lang="en" class="h-screen">
+		<head>
+			<meta charset="utf-8"/>
+			<title>Brandon Hang - Portfolio</title>
+			<link href="assets/css/output.css" rel="stylesheet"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+			<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+			<script src="assets/js/htmx.min.js"></script>
+		</head>
+		<body class="bg-slate-800">
+			@components.Nav()
+			<main class="max-w-screen-lg mx-auto p-4">
+				{ children... }
+			</main>
+		</body>
+	</html>
+}

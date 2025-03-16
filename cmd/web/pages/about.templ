@@ -1,0 +1,40 @@
+package pages
+
+import (
+	"brandhang-portfolio/cmd/web"
+	"brandhang-portfolio/cmd/web/components/about"
+	"brandhang-portfolio/cmd/web/components/reusable"
+)
+
+templ About() {
+	@web.Base() {
+		@reusable.PageHeader("About Me")
+		<div class="container mx-auto">
+			<div class="block sm:flex sm:gap-10 mt-2 sm:mt-4">
+				<div class="font-primary w-2xl  text-left">
+					<h2 class="text-4xl font-extrabold text-white">Hi, I'm Brandon</h2>
+					<p class="text-neutral-200 text-lg">
+						Client Platform Engineer
+					</p>
+					@about.Socials()
+					<p class="mb-4 text-neutral-200 text-lg">
+						A passionate Platform engineer, Solutions architect and Sys Admin. IT graduate from California State University, Fresno. Currently working at Meta as a Platform Engineer.
+					</p>
+					<p class="mb-4 text-neutral-200 text-lg">
+						Have experience with cloud computing (AWS), Docker containers, Infrastructure as code, CICD pipelines and github actions. Also have knowledge on networking, creating web apps, and automation scripting.
+					</p>
+					<p class="mb-4 text-neutral-200 text-lg">
+						I enjoy building new relationships and finding more efficient solutions to ongoing problems. On my free time, I play tennis, video games, tinker with my home server, and have recently picked up 3d printing and photography.
+					</p>
+				</div>
+				<div class="flex flex-col items-center w-full sm:w-1/4 mb-7 sm:mb-0">
+					<img class="rounded-lg w-96" src="assets/imgs/avataaars.svg"/>
+					<a href="https://resume.brandhang.net" class="font-primary mt-4 py-2.5 text-md w-full text-white inline-flex bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg justify-center">
+						<img class="h-6 w-6 text-white me-2" src="assets/imgs/resume.svg"/>
+						Resume
+					</a>
+				</div>
+			</div>
+		</div>
+	}
+}

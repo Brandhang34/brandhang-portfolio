@@ -1,0 +1,49 @@
+package pages
+
+import (
+	"brandhang-portfolio/cmd/web"
+	"brandhang-portfolio/cmd/web/components/portfolio"
+	"brandhang-portfolio/cmd/web/components/reusable"
+	"brandhang-portfolio/internal/handler"
+)
+
+templ Portfolio(portfolioList []handler.Portfolio) {
+	@web.Base() {
+		@reusable.PageHeader("Portfolio")
+		<div class="flex justify-between  border-primary-light pb-3 gap-3">
+			<div class="relative">
+				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+					<svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
+					</svg>
+				</div>
+				<input
+					type="search"
+					name="search-portfolio"
+					aria-label="Search"
+					class="font-primary block p-4 ps-10 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
+					placeholder="Search"
+					hx-post="/search-portfolio"
+					hx-trigger="input changed, search"
+					hx-target="#search-results"
+					hx-indicator=".htmx-indicator"
+					required
+				/>
+			</div>
+			<select
+				class="font-primary block p-4 ps-6 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+				name="filter-tags"
+				hx-target="#search-results"
+				hx-post="/search-portfolio"
+			>
+				<option selected value="all">All Tags</option>
+				<option value="projects">Projects</option>
+				<option value="certifications">Certifications</option>
+				<option value="homelab">Homelab</option>
+			</select>
+		</div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-10" id="search-results">
+			@portfolio.PortfolioList(portfolioList)
+		</div>
+	}
+}
