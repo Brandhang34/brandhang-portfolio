@@ -3,10 +3,8 @@ WORKDIR /app
 
 COPY go.mod go.sum ./
 # RUN go mod download
-RUN ls -la && go mod tidy && go mod download
-
-
 COPY . .
+RUN ls -la && go mod tidy && go mod download && go list -m all
 
 RUN go build -o main cmd/api/main.go
 
