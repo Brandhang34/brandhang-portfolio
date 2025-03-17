@@ -7,7 +7,7 @@ RUN go mod download
 # Generate
 FROM ghcr.io/a-h/templ:latest AS generate-stage
 WORKDIR /app
-COPY . .
+COPY --chown=65532:65532 . .
 RUN ["templ", "generate"]
 
 # Build
