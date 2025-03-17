@@ -1,7 +1,5 @@
 package web
 
-import components "github.com/Brandhang34/brandhang-portfolio/cmd/web/components/shared"
-
 templ Base() {
 	<!DOCTYPE html>
 	<html lang="en" class="h-screen">
@@ -14,7 +12,7 @@ templ Base() {
 			<script src="assets/js/htmx.min.js"></script>
 		</head>
 		<body class="bg-slate-800">
-			@components.Nav()
+			@Nav()
 			<main class="max-w-screen-lg mx-auto p-4">
 				{ children... }
 			</main>
