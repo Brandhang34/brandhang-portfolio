@@ -4,8 +4,6 @@ import (
 	"net/http"
 
 	"github.com/Brandhang34/brandhang-portfolio/cmd/web"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/portfolio"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/pages"
 	"github.com/Brandhang34/brandhang-portfolio/internal/handler"
 
 	"github.com/labstack/echo/v4"
@@ -21,16 +19,16 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	// Web Pages
 	e.GET("/", func(c echo.Context) (err error) {
-		return pages.Home().Render(c.Request().Context(), c.Response())
+		return web.Home().Render(c.Request().Context(), c.Response())
 	})
 	e.GET("/about", func(c echo.Context) (err error) {
-		return pages.About().Render(c.Request().Context(), c.Response())
+		return web.About().Render(c.Request().Context(), c.Response())
 	})
 	e.GET("/portfolio", func(c echo.Context) (err error) {
-		return pages.Portfolio(handler.LoadAllPortfolioItems()).Render(c.Request().Context(), c.Response())
+		return web.Portfolio(handler.LoadAllPortfolioItems()).Render(c.Request().Context(), c.Response())
 	})
 	e.GET("/contact", func(c echo.Context) (err error) {
-		return pages.Contact().Render(c.Request().Context(), c.Response())
+		return web.Contact().Render(c.Request().Context(), c.Response())
 	})
 
 	// Search Projects functionality
@@ -38,7 +36,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		searchQuery := c.FormValue("search-portfolio")
 		tagsQuery := c.FormValue("filter-tags")
 		projects := handler.SearchProjectsHandler(searchQuery, tagsQuery)
-		return portfolio.PortfolioList(projects).Render(c.Request().Context(), c.Response())
+		return web.PortfolioList(projects).Render(c.Request().Context(), c.Response())
 	})
 
 	e.POST("/submit-contact-msg", func(c echo.Context) (err error) {

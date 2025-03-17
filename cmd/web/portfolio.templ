@@ -1,15 +1,10 @@
-package pages
+package web
 
-import (
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/portfolio"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/reusable"
-	"github.com/Brandhang34/brandhang-portfolio/internal/handler"
-)
+import "github.com/Brandhang34/brandhang-portfolio/internal/handler"
 
 templ Portfolio(portfolioList []handler.Portfolio) {
-	@web.Base() {
-		@reusable.PageHeader("Portfolio")
+	@Base() {
+		@PageHeader("Portfolio")
 		<div class="flex justify-between  border-primary-light pb-3 gap-3">
 			<div class="relative">
 				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -43,7 +38,26 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 			</select>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-10" id="search-results">
-			@portfolio.PortfolioList(portfolioList)
+			@PortfolioList(portfolioList)
+		</div>
+	}
+}
+
+templ PortfolioList(portfolioList []handler.Portfolio) {
+	for _, portfolioItem := range portfolioList {
+		<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+			<a href={ templ.URL(portfolioItem.URL) }>
+				<img class="rounded-t-lg" src={ portfolioItem.ImagePath } alt=""/>
+			</a>
+			<div class="p-5">
+				<h5 class="font-primary mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{ portfolioItem.Title }</h5>
+				<div class="flex space-x-1">
+					for _, tags := range portfolioItem.Tags {
+						<span class="font-primary bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800">{ tags }</span>
+					}
+				</div>
+				<p class="font-primary my-3 font-normal text-gray-700 dark:text-gray-400">{ portfolioItem.Description }</p>
+			</div>
 		</div>
 	}
 }

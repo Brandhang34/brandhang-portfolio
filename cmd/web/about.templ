@@ -1,14 +1,8 @@
-package pages
-
-import (
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/about"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/reusable"
-)
+package web
 
 templ About() {
-	@web.Base() {
-		@reusable.PageHeader("About Me")
+	@Base() {
+		@PageHeader("About Me")
 		<div class="container mx-auto">
 			<div class="block sm:flex sm:gap-10 mt-2 sm:mt-4">
 				<div class="font-primary w-2xl  text-left">
@@ -16,7 +10,7 @@ templ About() {
 					<p class="text-neutral-200 text-lg">
 						Client Platform Engineer
 					</p>
-					@about.Socials()
+					@Socials()
 					<p class="mb-4 text-neutral-200 text-lg">
 						A passionate Platform engineer, Solutions architect and Sys Admin. IT graduate from California State University, Fresno. Currently working at Meta as a Platform Engineer.
 					</p>
@@ -37,4 +31,15 @@ templ About() {
 			</div>
 		</div>
 	}
+}
+
+templ Socials() {
+	<div class="text-blue-400 container flex gap-5">
+		<div><a href="https://www.linkedin.com/in/brandon-hang-a8a2b220b/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></div>
+		<div><a href="https://github.com/Brandhang34" target="_blank"><i class="fa-brands fa-github"></i></a></div>
+		<div><a href="https://www.facebook.com/BrandonHang34" target="_blank"><i class="fa-brands fa-facebook"></i></a></div>
+		<div><a href="https://www.instagram.com/brandang34" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+		<div><a href="https://twitter.com/Brandhang34" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></div>
+		<div><a href="https://littlelink.sushamae.com" target="_blank"><i class="fab fa-fw fa-dribbble"></i></a></div>
+	</div>
 }

@@ -1,4 +1,21 @@
-package components
+package web
+
+templ Divider() {
+	<div class="pt-2 pb-10 flex justify-center items-center">
+		<div class="flex items-center gap-2">
+			<div class="w-30 h-[2px] bg-gray-400"></div>
+			<img class="w-6 h-6" draggable="false" src="assets/imgs/diamond.svg"/>
+			<div class="w-30 h-[2px] bg-gray-400"></div>
+		</div>
+	</div>
+}
+
+templ PageHeader(title string) {
+	<div class="text-center mt-2">
+		<h1 class="font-primary text-6xl font-semibold tracking-tight text-balance text-neutral-200">{ title }</h1>
+	</div>
+	@Divider()
+}
 
 templ Nav() {
 	<nav class="bg-white border-gray-200 dark:bg-slate-800">

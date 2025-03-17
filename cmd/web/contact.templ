@@ -1,11 +1,8 @@
-package pages
-
-import "github.com/Brandhang34/brandhang-portfolio/cmd/web"
-import "github.com/Brandhang34/brandhang-portfolio/cmd/web/components/reusable"
+package web
 
 templ Contact() {
-	@web.Base() {
-		@reusable.PageHeader("Contact")
+	@Base() {
+		@PageHeader("Contact")
 		<div class="`px-4 mx-auto max-w-screen-md">
 			<form action="#" class="space-y-8">
 				<div>

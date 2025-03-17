@@ -1,12 +1,7 @@
-package pages
-
-import (
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web"
-	"github.com/Brandhang34/brandhang-portfolio/cmd/web/components/reusable"
-)
+package web
 
 templ Home() {
-	@web.Base() {
+	@Base() {
 		<div class="mx-auto max-w-2xl py-4 sm:py-8 lg:py-10">
 			// <div class="h-screen mx-auto items-center justify-center">
 			<div class="relative px-1 py-1 flex flex-col items-center justify-center text-center">
@@ -14,7 +9,7 @@ templ Home() {
 			</div>
 			<div class="text-center mt-6">
 				<h1 class="font-primary text-6xl font-semibold tracking-tight text-balance text-neutral-200 sm:text-7xl">Brandon Hang</h1>
-				@reusable.Divider()
+				@Divider()
 				<p class="font-primary text-lg font-semibold text-neutral-200">Platform Engineer | Sys Admin | Solutions Architect</p>
 			</div>
 		</div>
