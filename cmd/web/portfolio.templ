@@ -16,7 +16,7 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 					type="search"
 					name="search-portfolio"
 					aria-label="Search"
-					class="font-primary block p-4 ps-10 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
+					class="font-primary block w-full p-4 ps-10 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
 					placeholder="Search"
 					hx-post="/search-portfolio"
 					hx-trigger="input changed, search"
@@ -26,7 +26,7 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 				/>
 			</div>
 			<select
-				class="font-primary block p-4 ps-6 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+				class="font-primary block p-2.5 w-28 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
 				name="filter-tags"
 				hx-target="#search-results"
 				hx-post="/search-portfolio"
@@ -45,7 +45,7 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 
 templ PortfolioList(portfolioList []handler.Portfolio) {
 	for _, portfolioItem := range portfolioList {
-		<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+		<div class="max-w-sm mb-8 md:mb-0 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 			<a href={ templ.URL(portfolioItem.URL) }>
 				<img class="rounded-t-lg" src={ portfolioItem.ImagePath } alt=""/>
 			</a>
