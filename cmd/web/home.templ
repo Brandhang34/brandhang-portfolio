@@ -3,18 +3,14 @@ package web
 templ Home() {
 	@Base() {
 		<div class="mx-auto max-w-2xl py-4 sm:py-8 lg:py-10">
-			// <div class="h-screen mx-auto items-center justify-center">
 			<div class="relative px-1 py-1 flex flex-col items-center justify-center text-center">
-				<img draggable="false" src="assets/imgs/avataaars.svg"/>
+				<img class="w-34 h-34 sm:w-40 sm:h-40 md:w-46 md:h-46 lg:w-52 lg:h-52" draggable="false" src="assets/imgs/avataaars.svg"/>
 			</div>
 			<div class="text-center mt-6">
-				<h1 class="font-primary text-6xl font-semibold tracking-tight text-balance text-neutral-200 sm:text-7xl">Brandon Hang</h1>
+				<h1 class="font-primary  font-semibold tracking-tight text-balance text-neutral-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Brandon Hang</h1>
 				@Divider()
-				<p class="font-primary text-lg font-semibold text-neutral-200">Platform Engineer | Sys Admin | Solutions Architect</p>
+				<p class="font-primary text-sm sm:text-md md:text-lg lg:text-2xl font-semibold text-neutral-200">Platform Engineer | Sys Admin | Solutions Architect</p>
 			</div>
 		</div>
-		// <section>
-		// @PortfolioSection(handler.LoadAllPortfolioItems())
-		// </section>
 	}
 }
