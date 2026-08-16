@@ -2,23 +2,26 @@
 
 # Build the application
 all: build test
+
+# The templ CLI must match the templ runtime in go.mod -- a newer CLI emits
+# calls the pinned library does not export. Always derive it, never use @latest.
+TEMPL_VERSION := $(shell go list -m -f '{{.Version}}' github.com/a-h/templ)
+
 templ-install:
-	@if ! command -v templ > /dev/null; then \
-		read -p "Go's 'templ' is not installed on your machine. Do you want to install it? [Y/n] " choice; \
-		if [ "$$choice" != "n" ] && [ "$$choice" != "N" ]; then \
-			go install github.com/a-h/templ/cmd/templ@latest; \
-			if [ ! -x "$$(command -v templ)" ]; then \
-				echo "templ installation failed. Exiting..."; \
-				exit 1; \
-			fi; \
-		else \
-			echo "You chose not to install templ. Exiting..."; \
+	@if [ "$$(templ version 2>/dev/null | tr -d 'v ')" != "$$(echo $(TEMPL_VERSION) | tr -d 'v')" ]; then \
+		echo "Installing templ $(TEMPL_VERSION) to match go.mod..."; \
+		go install github.com/a-h/templ/cmd/templ@$(TEMPL_VERSION); \
+		if [ ! -x "$$(command -v templ)" ]; then \
+			echo "templ installation failed. Exiting..."; \
 			exit 1; \
 		fi; \
 	fi
+# Pinned: an unpinned "latest" download means the generated output.css can change
+# without any source change, which breaks the CSS drift check in CI.
+TAILWIND_VERSION := v4.1.3
+
 tailwind:
-	@if [ ! -f tailwindcss ]; then curl -sL https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 -o tailwindcss; fi
-	
+	@if [ ! -f tailwindcss ]; then curl -sL https://github.com/tailwindlabs/tailwindcss/releases/download/$(TAILWIND_VERSION)/tailwindcss-linux-x64 -o tailwindcss; fi
 	@chmod +x tailwindcss
 
 build: tailwind templ-install

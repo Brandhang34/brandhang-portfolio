@@ -1,0 +1,79 @@
+[
+  {
+    "title": "Homelab",
+    "image": "homelab.png",
+    "description": "Personal Homelab hosting networking systems and multiple services, ranging from virtual machines, to highly available microservices.",
+    "url": "",
+    "tags": ["Project", "Homelab"]
+  },
+  {
+    "title": "3 Tier Web App",
+    "image": "3tierWeb.jpg",
+    "description": "Created a highly available WordPress website using AWS services. Available in Terraform for ease of deployment.",
+    "url": "https://github.com/Brandhang34/ThreeTierWebApp/tree/main",
+    "tags": ["Project", "AWS"]
+  },
+  {
+    "title": "Serverless CI/CD Resume",
+    "image": "crc.png",
+    "description": "Static website stored in an S3 Bucket and served by a CDN in AWS. Includes DevOps workflows such as CI/CD pipelines and IaC.",
+    "url": "https://github.com/Brandhang34/Serverless-CICD-Resume",
+    "tags": ["Project", "AWS"]
+  },
+  {
+    "title": "ByteSender",
+    "image": "",
+    "description": "CLI tool that lets you upload files to S3 and share them.",
+    "url": "",
+    "tags": ["Project", "Golang", "Docker", "AWS"]
+  },
+  {
+    "title": "Portfolio",
+    "image": "",
+    "description": "This website, written in Go, templ, HTMX and Tailwind CSS.",
+    "url": "https://github.com/Brandhang34/brandhang-portfolio",
+    "tags": ["Project", "Golang", "Docker"]
+  },
+  {
+    "title": "Minecraft Server",
+    "image": "minecraft.jpg",
+    "description": "Self hosted Minecraft server, utilizing networking tunnels and handlers written as systemd services.",
+    "url": "",
+    "tags": ["Wiki", "Homelab"]
+  },
+  {
+    "title": "Dotfiles",
+    "image": "",
+    "description": "My terminal setup and configuration, including the Ghostty terminal, Starship prompt, Helix text editor and Fish shell.",
+    "url": "",
+    "tags": ["Project"]
+  },
+  {
+    "title": "Cloud Windows Gaming VM",
+    "image": "cloud-gaming.png",
+    "description": "Self hosted VDI with a GPU passed through for video rendering and remote gaming.",
+    "url": "",
+    "tags": ["Wiki", "Homelab"]
+  },
+  {
+    "title": "AWS Cloud Practitioner",
+    "image": "AWS_CCP.png",
+    "description": "Certified in AWS Cloud Practitioner.",
+    "url": "https://www.credly.com/badges/7252e2a1-5f01-4590-961a-5dbb9671a556/public_url",
+    "tags": ["Certification"]
+  },
+  {
+    "title": "AWS Solutions Architect - Associate",
+    "image": "AWS_SAA.jpg",
+    "description": "Certified in AWS Solutions Architect Associate.",
+    "url": "https://www.credly.com/badges/7cd3a6be-ba3d-41f0-8431-1a439e39c63b/public_url",
+    "tags": ["Certification"]
+  },
+  {
+    "title": "Hashicorp Terraform Associate",
+    "image": "HCTA_03.jpg",
+    "description": "Certified in Hashicorp Terraform Associate.",
+    "url": "https://www.credly.com/badges/65b3ae0d-cf3f-4f6d-8140-8e7426b98722/public_url",
+    "tags": ["Certification"]
+  }
+]

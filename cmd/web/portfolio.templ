@@ -5,7 +5,16 @@ import "github.com/Brandhang34/brandhang-portfolio/internal/handler"
 templ Portfolio(portfolioList []handler.Portfolio) {
 	@Base() {
 		@PageHeader("Portfolio")
-		<div class="flex justify-between  border-primary-light pb-3 gap-3">
+		// Both controls live in one form so each request carries the search
+		// query *and* the tag filter; posting them separately meant selecting a
+		// tag cleared the query and vice versa.
+		<form
+			class="flex justify-between pb-3 gap-3"
+			hx-post="/search-portfolio"
+			hx-trigger="input changed from:find input[type=search], search from:find input[type=search], change from:find select"
+			hx-target="#search-results"
+			hx-indicator=".htmx-indicator"
+		>
 			<div class="relative">
 				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 					<svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -15,28 +24,22 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 				<input
 					type="search"
 					name="search-portfolio"
-					aria-label="Search"
+					aria-label="Search portfolio"
 					class="font-primary block w-full p-4 ps-10 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
 					placeholder="Search"
-					hx-post="/search-portfolio"
-					hx-trigger="input changed, search"
-					hx-target="#search-results"
-					hx-indicator=".htmx-indicator"
-					required
 				/>
 			</div>
 			<select
 				class="font-primary block p-2.5 w-28 text-sm text-white border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
 				name="filter-tags"
-				hx-target="#search-results"
-				hx-post="/search-portfolio"
+				aria-label="Filter by tag"
 			>
 				<option selected value="all">All Tags</option>
 				<option value="projects">Projects</option>
 				<option value="certifications">Certifications</option>
 				<option value="homelab">Homelab</option>
 			</select>
-		</div>
+		</form>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-10" id="search-results">
 			@PortfolioList(portfolioList)
 		</div>
@@ -44,20 +47,41 @@ templ Portfolio(portfolioList []handler.Portfolio) {
 }
 
 templ PortfolioList(portfolioList []handler.Portfolio) {
+	if len(portfolioList) == 0 {
+		<p class="font-primary text-neutral-300 col-span-full">No matching entries.</p>
+	}
 	for _, portfolioItem := range portfolioList {
-		<div class="max-w-sm mb-8 md:mb-0 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-			<a href={ templ.URL(portfolioItem.URL) }>
-				<img class="rounded-t-lg" src={ portfolioItem.ImagePath } alt=""/>
-			</a>
+		<div class="max-w-sm mb-8 md:mb-0 bg-gray-800 border border-gray-700 rounded-lg shadow-sm">
+			if portfolioItem.URL != "" {
+				<a href={ templ.URL(portfolioItem.URL) } target="_blank" rel="noopener noreferrer">
+					@portfolioImage(portfolioItem)
+					<span class="sr-only">{ portfolioItem.Title }</span>
+				</a>
+			} else {
+				@portfolioImage(portfolioItem)
+			}
 			<div class="p-5">
-				<h5 class="font-primary mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{ portfolioItem.Title }</h5>
-				<div class="flex space-x-1">
-					for _, tags := range portfolioItem.Tags {
-						<span class="font-primary bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800">{ tags }</span>
+				<h2 class="font-primary mb-2 text-2xl font-bold tracking-tight text-white">{ portfolioItem.Title }</h2>
+				<div class="flex flex-wrap gap-1">
+					for _, tag := range portfolioItem.Tags {
+						<span class="font-primary bg-blue-200 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-sm">{ tag }</span>
 					}
 				</div>
-				<p class="font-primary my-3 font-normal text-gray-700 dark:text-gray-400">{ portfolioItem.Description }</p>
+				<p class="font-primary my-3 font-normal text-gray-400">{ portfolioItem.Description }</p>
 			</div>
+		</div>
+	}
+}
+
+// portfolioImage renders the entry's image, falling back to a styled placeholder
+// when the entry has none. Previously these pointed at a blank.jpg that did not
+// exist in the assets directory, so the cards rendered a broken image.
+templ portfolioImage(item handler.Portfolio) {
+	if item.ImagePath() != "" {
+		<img class="rounded-t-lg w-full" src={ item.ImagePath() } alt={ item.Title }/>
+	} else {
+		<div class="rounded-t-lg w-full h-40 flex items-center justify-center bg-gray-700" aria-hidden="true">
+			<span class="font-primary text-4xl font-bold text-gray-500">{ initial(item.Title) }</span>
 		</div>
 	}
 }

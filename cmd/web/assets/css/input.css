@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
 
+/* Tailwind v4 is configured here, in CSS. The old v3-style tailwind.config.js
+   was silently ignored by the v4 CLI, so any utility built from it (e.g.
+   ring-primary-500) generated no CSS at all. */
 @theme {
   --font-primary: "JetBrains Mono", monospace;
+
+  --color-primary-light: #f7f8fc;
+  --color-secondary-light: #ffffff;
+  --color-ternary-light: #f6f7f8;
+
+  --color-primary-dark: #0d2438;
+  --color-secondary-dark: #102d44;
+  --color-ternary-dark: #1e3851;
 }
