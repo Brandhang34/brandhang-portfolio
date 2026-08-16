@@ -4,7 +4,7 @@ templ Divider() {
 	<div class="pt-2 pb-10 flex justify-center items-center">
 		<div class="flex items-center gap-2">
 			<div class="w-30 h-[2px] bg-gray-400"></div>
-			<img class="w-6 h-6" draggable="false" src="assets/imgs/diamond.svg"/>
+			<img class="w-6 h-6" draggable="false" src="/assets/imgs/diamond.svg" alt=""/>
 			<div class="w-30 h-[2px] bg-gray-400"></div>
 		</div>
 	</div>
@@ -17,17 +17,25 @@ templ PageHeader(title string) {
 	@Divider()
 }
 
+templ NavLink(href, label string) {
+	<li>
+		<a href={ templ.SafeURL(href) } class="block py-2 px-3 md:p-0 rounded-sm md:hover:bg-transparent md:hover:text-blue-500 text-white hover:bg-gray-700 md:dark:hover:bg-transparent text-lg font-primary">{ label }</a>
+	</li>
+}
+
 templ Nav() {
-	<nav class="bg-white border-gray-200 dark:bg-slate-800">
+	<nav class="bg-slate-800 border-gray-200">
 		<div class="bg-slate-800 max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
 			<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-				<img class="w-16 h-16" draggable="false" src="assets/imgs/avataaars.svg"/>
-				<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white font-primary">Brandon</span>
+				<img class="w-16 h-16" draggable="false" src="/assets/imgs/avataaars.svg" alt=""/>
+				<span class="self-center text-2xl font-semibold whitespace-nowrap text-white font-primary">Brandon</span>
 			</a>
 			<button
-				hx-on:click="document.getElementById('navbar-default').classList.toggle('hidden')"
+				hx-on:click="
+					this.setAttribute('aria-expanded', document.getElementById('navbar-default').classList.toggle('hidden') ? 'false' : 'true')
+				"
 				type="button"
-				class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+				class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
 				aria-controls="navbar-default"
 				aria-expanded="false"
 			>
@@ -37,16 +45,10 @@ templ Nav() {
 				</svg>
 			</button>
 			<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-default">
-				<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-slate-800 dark:border-gray-700">
-					<li>
-						<a href="/about" class="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 text-lg font-primary">About Me</a>
-					</li>
-					<li>
-						<a href="/portfolio" class="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 text-lg font-primary">Portfolio</a>
-					</li>
-					<li>
-						<a href="/contact" class="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 text-lg font-primary">Contact</a>
-					</li>
+				<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-slate-800 border-gray-700">
+					@NavLink("/about", "About Me")
+					@NavLink("/portfolio", "Portfolio")
+					@NavLink("/contact", "Contact")
 				</ul>
 			</div>
 		</div>

@@ -16,9 +16,12 @@ templ-install:
 			exit 1; \
 		fi; \
 	fi
+# Pinned: an unpinned "latest" download means the generated output.css can change
+# without any source change, which breaks the CSS drift check in CI.
+TAILWIND_VERSION := v4.1.3
+
 tailwind:
-	@if [ ! -f tailwindcss ]; then curl -sL https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 -o tailwindcss; fi
-	
+	@if [ ! -f tailwindcss ]; then curl -sL https://github.com/tailwindlabs/tailwindcss/releases/download/$(TAILWIND_VERSION)/tailwindcss-linux-x64 -o tailwindcss; fi
 	@chmod +x tailwindcss
 
 build: tailwind templ-install

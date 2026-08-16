@@ -22,9 +22,9 @@ templ About() {
 					</p>
 				</div>
 				<div class="flex flex-col items-center w-full sm:w-1/4 mb-7 sm:mb-0">
-					<img class="rounded-lg w-96 hidden md:flex md:w-auto" src="assets/imgs/avataaars.svg"/>
+					<img class="rounded-lg w-96 hidden md:flex md:w-auto" src="/assets/imgs/avataaars.svg" alt="Illustrated avatar of Brandon Hang"/>
 					<a href="https://resume.brandhang.net" class="font-primary mt-4 px-6 py-2.5 md:flex text-md w-full text-white inline-flex bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg justify-center">
-						<img class="h-6 w-6 text-white me-2 max-w-screen-lg" src="assets/imgs/resume.svg"/>
+						<img class="h-6 w-6 text-white me-2 max-w-screen-lg" src="/assets/imgs/resume.svg" alt=""/>
 						Resume
 					</a>
 				</div>
@@ -34,12 +34,23 @@ templ About() {
 }
 
 templ Socials() {
-	<div class="text-blue-400 container flex gap-5">
-		<div><a href="https://www.linkedin.com/in/brandon-hang-a8a2b220b/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></div>
-		<div><a href="https://github.com/Brandhang34" target="_blank"><i class="fa-brands fa-github"></i></a></div>
-		<div><a href="https://www.facebook.com/BrandonHang34" target="_blank"><i class="fa-brands fa-facebook"></i></a></div>
-		<div><a href="https://www.instagram.com/brandang34" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
-		<div><a href="https://twitter.com/Brandhang34" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></div>
-		<div><a href="https://littlelink.sushamae.com" target="_blank"><i class="fab fa-fw fa-dribbble"></i></a></div>
-	</div>
+	<ul class="text-blue-400 container flex gap-5 list-none">
+		@SocialLink("https://www.linkedin.com/in/brandon-hang-a8a2b220b/", "fa-brands fa-linkedin", "LinkedIn")
+		@SocialLink("https://github.com/Brandhang34", "fa-brands fa-github", "GitHub")
+		@SocialLink("https://www.facebook.com/BrandonHang34", "fa-brands fa-facebook", "Facebook")
+		@SocialLink("https://www.instagram.com/brandang34", "fa-brands fa-instagram", "Instagram")
+		@SocialLink("https://twitter.com/Brandhang34", "fa-brands fa-x-twitter", "X")
+		@SocialLink("https://littlelink.sushamae.com", "fa-solid fa-fw fa-link", "All my links")
+	</ul>
+}
+
+// SocialLink renders an icon-only link. The visually hidden label gives the link
+// an accessible name -- without it screen readers announce six unnamed links.
+templ SocialLink(href, icon, label string) {
+	<li>
+		<a href={ templ.SafeURL(href) } target="_blank" rel="noopener noreferrer">
+			<i class={ icon } aria-hidden="true"></i>
+			<span class="sr-only">{ label }</span>
+		</a>
+	</li>
 }

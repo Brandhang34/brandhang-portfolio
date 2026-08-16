@@ -1,0 +1,21 @@
+# Secrets -- the build context is COPYed wholesale, so without this a local
+# `docker build` bakes the Discord bot token into an image layer.
+.env
+.env.*
+!.env.example
+
+# Build outputs and large local binaries (~157MB of build context)
+main
+tailwindcss
+tmp/
+*.test
+*.out
+
+# Repo metadata
+.git
+.github
+.gitignore
+README.md
+LICENSE
+.air.toml
+Makefile

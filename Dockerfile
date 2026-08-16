@@ -16,14 +16,16 @@ WORKDIR /app
 COPY --from=generate-stage /app .
 RUN go build -o main cmd/api/main.go
 
-# # Test
-# FROM build-stage AS test-stage
-# RUN go test -v ./...
+# Test
+# Not in the default build graph (nothing downstream depends on it) -- run it
+# explicitly with `docker build --target test-stage .`. CI is the real gate.
+FROM build-stage AS test-stage
+RUN go test -v ./...
 
 # Deploy
 FROM alpine:latest
 WORKDIR /app
 COPY --from=build-stage /app/main .
 EXPOSE 8080
-# ENV PORT=8080
+ENV PORT=8080
 CMD [ "./main" ]
